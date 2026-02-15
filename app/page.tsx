@@ -8,8 +8,17 @@ export default function Home() {
           Sense of Scale
         </h1>
         <p className="text-lg text-gray-500 mb-12">
-          How many users does Instagram have? How much revenue did Nike make?
-          Test your intuition about the scale of real businesses.
+          What is Snap&apos;s MAU? How much revenue did Allbirds make last year?
+          Test your intuition about business scale. For subscribers of{" "}
+          <a
+            href="https://residualthoughts.substack.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800"
+          >
+            Residual Thoughts
+          </a>
+          .
         </p>
         <Link
           href="/play"

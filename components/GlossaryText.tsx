@@ -1,16 +1,39 @@
 "use client";
 
+import { useState } from "react";
 import GLOSSARY from "@/lib/glossary";
 
 interface GlossaryTextProps {
   text: string;
 }
 
+function GlossaryTerm({ term, definition }: { term: string; definition: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <span className="relative">
+      <span
+        role="button"
+        tabIndex={0}
+        onClick={() => setOpen(!open)}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+        className="underline decoration-dotted decoration-gray-400 underline-offset-4 cursor-help"
+      >
+        {term}
+      </span>
+      {open && (
+        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 rounded-lg bg-gray-900 text-white text-sm px-4 py-3 z-10 leading-relaxed shadow-lg">
+          <span className="font-semibold">{term}:</span> {definition}
+        </span>
+      )}
+    </span>
+  );
+}
+
 export default function GlossaryText({ text }: GlossaryTextProps) {
-  // Sort terms by length (longest first) to match longer phrases before shorter ones
   const terms = Object.keys(GLOSSARY).sort((a, b) => b.length - a.length);
 
-  // Build a regex that matches any glossary term (case-insensitive)
   const pattern = new RegExp(
     `(${terms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`,
     "gi"
@@ -24,16 +47,7 @@ export default function GlossaryText({ text }: GlossaryTextProps) {
         const key = part.toLowerCase();
         const definition = GLOSSARY[key];
         if (definition) {
-          return (
-            <span key={i} className="relative group/tip">
-              <span className="underline decoration-dotted decoration-gray-400 underline-offset-4 cursor-help">
-                {part}
-              </span>
-              <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 rounded-lg bg-gray-900 text-white text-sm px-4 py-3 opacity-0 group-hover/tip:opacity-100 transition-opacity z-10 leading-relaxed">
-                <span className="font-semibold">{part}:</span> {definition}
-              </span>
-            </span>
-          );
+          return <GlossaryTerm key={i} term={part} definition={definition} />;
         }
         return <span key={i}>{part}</span>;
       })}
