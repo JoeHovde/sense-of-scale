@@ -1,11 +1,23 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <h1 className="text-4xl font-bold mb-4">Sense of Scale</h1>
-      <p className="text-lg text-gray-600 mb-8">
-        How well do you know the scale of things?
-      </p>
-      <p className="text-gray-500">Coming soon...</p>
+      <div className="text-center max-w-md">
+        <h1 className="text-5xl font-bold mb-4 tracking-tight">
+          Sense of Scale
+        </h1>
+        <p className="text-lg text-gray-500 mb-12">
+          How many users does Instagram have? How much revenue did Nike make?
+          Test your intuition about the scale of real businesses.
+        </p>
+        <Link
+          href="/play"
+          className="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg text-lg font-medium hover:bg-blue-700 transition-colors"
+        >
+          Play Now
+        </Link>
+      </div>
     </main>
   );
 }
