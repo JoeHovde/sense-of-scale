@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { Question } from "@/lib/questions";
-import { calculateScore, scoreLabel, formatNumber } from "@/lib/scoring";
+import { calculateScore, formatNumber } from "@/lib/scoring";
+import { saveScore } from "@/lib/supabase";
+import Link from "next/link";
 
 interface GameResult {
   question: Question;
@@ -14,6 +17,10 @@ interface ScoreBoardProps {
 }
 
 export default function ScoreBoard({ results, onPlayAgain }: ScoreBoardProps) {
+  const [playerName, setPlayerName] = useState("");
+  const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
+
   const scores = results.map((r) => calculateScore(r.guess, r.question.answer));
   const totalScore = scores.reduce((sum, s) => sum + s, 0);
   const maxScore = results.length * 100;
@@ -29,6 +36,19 @@ export default function ScoreBoard({ results, onPlayAgain }: ScoreBoardProps) {
             ? "Getting there — keep reading those 10-Ks"
             : "Time to hit the annual reports";
 
+  async function handleSave(e: React.FormEvent) {
+    e.preventDefault();
+    if (!playerName.trim() || saving) return;
+    setSaving(true);
+    try {
+      await saveScore(playerName.trim(), totalScore, maxScore, results.length);
+      setSaved(true);
+    } catch {
+      alert("Failed to save score. Try again.");
+    }
+    setSaving(false);
+  }
+
   return (
     <div className="w-full max-w-lg">
       <div className="text-center mb-8">
@@ -37,6 +57,41 @@ export default function ScoreBoard({ results, onPlayAgain }: ScoreBoardProps) {
         </h2>
         <p className="text-lg text-gray-500">{overallLabel}</p>
       </div>
+
+      {!saved ? (
+        <form onSubmit={handleSave} className="mb-8">
+          <p className="text-sm text-gray-500 mb-2 text-center">
+            Save your score to the leaderboard
+          </p>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={playerName}
+              onChange={(e) => setPlayerName(e.target.value)}
+              placeholder="Your name..."
+              maxLength={30}
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="submit"
+              disabled={saving || !playerName.trim()}
+              className="px-4 py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50"
+            >
+              {saving ? "Saving..." : "Save"}
+            </button>
+          </div>
+        </form>
+      ) : (
+        <div className="mb-8 text-center">
+          <p className="text-sm text-green-600 mb-2">Score saved!</p>
+          <Link
+            href="/leaderboard"
+            className="text-sm text-blue-600 underline hover:text-blue-800"
+          >
+            View leaderboard
+          </Link>
+        </div>
+      )}
 
       <div className="space-y-3 mb-8">
         {results.map((r, i) => {
