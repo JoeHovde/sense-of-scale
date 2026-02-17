@@ -7,7 +7,7 @@ export default function Home() {
         <img
           src="/louvre_hero.jpeg"
           alt="Sense of Scale"
-          className="w-full h-48 object-cover rounded-xl mb-8"
+          className="w-full rounded-xl mb-8"
         />
         <h1 className="text-5xl font-bold mb-4 tracking-tight">
           Sense of Scale
