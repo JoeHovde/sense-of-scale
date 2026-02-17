@@ -51,6 +51,11 @@ export default function ScoreBoard({ results, onPlayAgain }: ScoreBoardProps) {
 
   return (
     <div className="w-full max-w-lg">
+      <img
+        src="/bridge_building_finish.jpeg"
+        alt="Results"
+        className="w-full h-40 object-cover rounded-xl mb-6"
+      />
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold mb-2">
           {totalScore} / {maxScore}
