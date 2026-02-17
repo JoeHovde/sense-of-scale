@@ -7,7 +7,7 @@ import RevealCard from "@/components/RevealCard";
 import ScoreBoard from "@/components/ScoreBoard";
 import GlossaryText from "@/components/GlossaryText";
 
-const QUESTIONS_PER_GAME = 10;
+const QUESTIONS_PER_GAME = 5;
 
 type GamePhase = "guessing" | "reveal" | "results";
 
