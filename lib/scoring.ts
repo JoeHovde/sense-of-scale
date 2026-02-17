@@ -31,12 +31,12 @@ export function calculateScore(guess: number, actual: number): number {
 }
 
 export function scoreLabel(score: number): string {
-  if (score >= 95) return "Nailed it";
-  if (score >= 75) return "Solid guess";
-  if (score >= 45) return "Not bad";
+  if (score >= 85) return "Amazing!!";
+  if (score >= 65) return "Good guess!";
+  if (score >= 45) return "Not bad!";
   if (score >= 20) return "In the ballpark";
-  if (score >= 5) return "Rough idea";
-  return "Way off";
+  if (score >= 5) return "Oof.";
+  return "Ouch. Tough one.";
 }
 
 export function formatNumber(n: number): string {

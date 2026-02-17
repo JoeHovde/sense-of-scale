@@ -27,14 +27,14 @@ export default function ScoreBoard({ results, onPlayAgain }: ScoreBoardProps) {
 
   const overallLabel =
     totalScore >= maxScore * 0.85
-      ? "You really know your stuff"
+      ? "Unreal! Or you cheated!"
       : totalScore >= maxScore * 0.65
-        ? "Solid business intuition"
+        ? "Very very good! Proud of you"
         : totalScore >= maxScore * 0.45
-          ? "Not bad — room to sharpen up"
+          ? "Well done! You've got this"
           : totalScore >= maxScore * 0.25
-            ? "Getting there — keep reading those 10-Ks"
-            : "Time to hit the annual reports";
+            ? "Something to build on!"
+            : "Not your best!!";
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
