@@ -52,7 +52,7 @@ export default function ScoreBoard({ results, onPlayAgain }: ScoreBoardProps) {
   return (
     <div className="w-full max-w-lg">
       <img
-        src="/bridge_building_finish.jpeg"
+        src="/swiss_finish.jpeg"
         alt="Results"
         className="w-full h-40 object-cover rounded-xl mb-6"
       />
