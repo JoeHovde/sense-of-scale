@@ -19,7 +19,7 @@
  * Within 5% scores at least double within 30%.
  */
 
-const POWER = 2.5;
+const POWER = 1.8;
 
 export function calculateScore(guess: number, actual: number): number {
   if (guess <= 0 || actual <= 0) return 0;
