@@ -22,9 +22,12 @@
 const POWER = 1.8;
 
 export function calculateScore(guess: number, actual: number): number {
-  if (guess <= 0 || actual <= 0) return 0;
+  const g = Math.abs(guess);
+  const a = Math.abs(actual);
+  if (g === 0 && a === 0) return 100;
+  if (g === 0 || a === 0) return 0;
 
-  const ratio = Math.min(guess, actual) / Math.max(guess, actual);
+  const ratio = Math.min(g, a) / Math.max(g, a);
   const score = 100 * Math.pow(ratio, POWER);
 
   return Math.max(0, Math.round(score));
