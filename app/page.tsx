@@ -13,8 +13,8 @@ export default function Home() {
           Sense of Scale
         </h1>
         <p className="text-lg text-gray-500 mb-12">
-          What is Snap&apos;s MAU? How much revenue did Allbirds make last year?
-          Test your intuition about business scale. For subscribers of{" "}
+          A game to test your intuition about business scale. For subscribers
+          of{" "}
           <a
             href="https://residualthoughts.substack.com"
             target="_blank"
