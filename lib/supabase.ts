@@ -20,7 +20,7 @@ export async function saveScore(
   if (error) throw error;
 }
 
-export async function getLeaderboard(limit = 20) {
+export async function getLeaderboard(limit = 15) {
   const { data, error } = await supabase
     .from("scores")
     .select("*")
