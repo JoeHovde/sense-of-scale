@@ -18,7 +18,7 @@ export default function LeaderboardPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getLeaderboard(50).then((data) => {
+    getLeaderboard(15).then((data) => {
       setScores(data || []);
       setLoading(false);
     });
