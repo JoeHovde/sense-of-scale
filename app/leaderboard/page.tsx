@@ -18,10 +18,16 @@ export default function LeaderboardPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getLeaderboard(15).then((data) => {
-      setScores(data || []);
-      setLoading(false);
-    });
+    getLeaderboard(15)
+      .then((data) => {
+        setScores(data || []);
+      })
+      .catch((err) => {
+        console.error("Failed to load leaderboard:", err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
